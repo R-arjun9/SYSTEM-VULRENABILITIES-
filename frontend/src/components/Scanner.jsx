@@ -14,7 +14,7 @@ const SCAN_STEPS = [
   "CALCULATING_SYSTEM_HEALTH_INDEX"
 ];
 
-const Scanner = () => {
+const Scanner = ({ isDemo }) => {
   const [scanResult, setScanResult] = useState(null);
   const [scanHistory, setScanHistory] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -22,6 +22,16 @@ const Scanner = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [scanLogs, setScanLogs] = useState([]);
   const logEndRef = useRef(null);
+
+  const MOCK_RESULT = {
+    system_info: { os: 'Windows', release: '11 Pro', architecture: 'x64' },
+    health_score: 42,
+    vulnerabilities: [
+      { type: 'AlwaysInstallElevated Enabled', severity: 'Critical', details: 'Registry misconfiguration allows standard users to install MSI files with SYSTEM rights.', mitigation: 'Disable AlwaysInstallElevated in Group Policy.' },
+      { type: 'Insecure DEP Policy', severity: 'High', details: 'Data Execution Prevention is not strictly enforced for all processes.', mitigation: 'Configure DEP to AlwaysOn/OptOut.' },
+      { type: 'Unauthorized Process Resident', severity: 'Medium', details: 'A process named payload.exe is executing from the user Temp directory.', mitigation: 'Terminate process and scan for persistence.' }
+    ]
+  };
 
   useEffect(() => {
     const history = JSON.parse(localStorage.getItem('scanHistory') || '[]');
@@ -59,10 +69,21 @@ const Scanner = () => {
       await new Promise(resolve => setTimeout(resolve, 600));
     }
 
+    if (isDemo) {
+      setScanLogs(prev => [...prev, "[SUCCESS] Simulation complete. Rendering results..."]);
+      await new Promise(resolve => setTimeout(resolve, 800));
+      setScanResult(MOCK_RESULT);
+      saveToHistory(MOCK_RESULT);
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:8080/api/scan');
-      if (!response.ok) throw new Error('Failed to fetch scan results');
       const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Audit engine failed');
+      }
       
       setScanLogs(prev => [...prev, "[SUCCESS] Audit complete. Generating report..."]);
       await new Promise(resolve => setTimeout(resolve, 800));

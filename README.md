@@ -45,13 +45,28 @@ To run this project on your local machine, follow these steps:
 - [Python 3.x](https://www.python.org/downloads/)
 - [Node.js & npm](https://nodejs.org/)
 
-### 1. Clone the Repository
+### 1. Clone & Install Dependencies
 ```bash
 git clone https://github.com/R-arjun9/SYSTEM-VULRENABILITIES-.git
 cd SYSTEM-VULRENABILITIES-
+
+# Install Python auditing dependencies
+pip install psutil
 ```
 
 ### 2. Start the Backend (Java)
+... (existing content) ...
+
+---
+
+## 🛠️ Troubleshooting: "No Data Showing?"
+If you are using the **Live GitHub Link** and the dashboard shows a "Connection Error" even though your Java server is running:
+
+1.  **Mixed Content Block:** Chrome blocks HTTPS sites from talking to HTTP Localhost.
+2.  **Fix:** Click the **Lock/Tune icon** next to the URL -> **Site Settings** -> **Insecure Content** -> Set to **Allow**.
+3.  **Refresh:** Reload the dashboard and your system telemetry will appear instantly!
+
+*Alternatively, running the project locally via `npm run dev` avoids this security check entirely.*
 Open a terminal in the root directory:
 ```bash
 javac SecurityServer.java

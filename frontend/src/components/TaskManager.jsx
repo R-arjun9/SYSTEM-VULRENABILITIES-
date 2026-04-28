@@ -1,19 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { Server, Cpu, HardDrive, AlertTriangle, Activity, Database, Search } from 'lucide-react';
 
-const TaskManager = () => {
+const TaskManager = ({ isDemo }) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
 
+  const MOCK_DATA = {
+    cpu_usage: 24.5,
+    memory_usage: 45.2,
+    used_memory: 8589934592,
+    total_memory: 17179869184,
+    processes: [
+      { name: 'system_explorer.exe', pid: 1420, cpu_percent: 1.2, memory_percent: 0.5 },
+      { name: 'security_watchdog.bin', pid: 2844, cpu_percent: 0.8, memory_percent: 0.2 },
+      { name: 'kernel_scheduler', pid: 4, cpu_percent: 4.5, memory_percent: 1.1 },
+      { name: 'browser_engine', pid: 8832, cpu_percent: 12.4, memory_percent: 3.4 },
+      { name: 'mal_payload_x64.msi', pid: 9912, cpu_percent: 25.2, memory_percent: 8.9 }
+    ]
+  };
+
   const fetchMetrics = async () => {
+    if (isDemo) {
+      setData(MOCK_DATA);
+      setLoading(false);
+      return;
+    }
     try {
       const response = await fetch('http://localhost:8080/api/taskmgr');
-      if (!response.ok) throw new Error('Failed to fetch metrics');
-      const json = await response.json();
-      if (json.error) throw new Error(json.error);
-      setData(json);
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.error || 'Backend failed to execute command');
+      }
+      setData(data);
       setError(null);
     } catch (err) {
       setError(err.message);
