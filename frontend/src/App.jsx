@@ -177,9 +177,9 @@ function App() {
               <div className="mt-12 p-6 bg-slate-950/80 rounded-2xl border border-blue-500/5 max-w-lg w-full">
                 <p className="text-[10px] text-blue-500 font-black uppercase mb-3 tracking-widest">How to fix this:</p>
                 <div className="font-mono text-[11px] text-blue-300/70 space-y-1">
-                  <p>1. Open your terminal in the project root.</p>
-                  <p>2. Run: <span className="text-blue-400">pip install psutil</span> (Required for Metrics)</p>
-                  <p>3. Run: <span className="text-blue-400">javac SecurityServer.java; java SecurityServer</span></p>
+                  <p>1. Click <span className="text-blue-400">Download Agent</span> and unzip the files.</p>
+                  <p>2. Right-click <span className="text-blue-400">run.bat</span> and select "Run as Administrator".</p>
+                  <p>3. This UI will automatically sync with your laptop.</p>
                   <p className="pt-4 text-red-400 font-black tracking-widest uppercase">⚠️ Browser Security Alert:</p>
                   <p>If using the Live Link, Chrome may block "Insecure Content" (Localhost).</p>
                   <p>Go to <span className="text-blue-400">Site Settings</span> and set <span className="text-blue-400">Insecure Content</span> to <span className="text-blue-400">Allow</span>.</p>
