@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, ShieldAlert, Cpu, Lock, Bug, User, Key, Play, RotateCcw, AlertTriangle, Activity, Zap, Terminal } from 'lucide-react';
+import { Shield, ShieldAlert, ShieldCheck, Cpu, Lock, Bug, User, Key, Play, RotateCcw, AlertTriangle, Activity, Zap, Terminal } from 'lucide-react';
 
 const BufferOverflowDemo = () => {
   const [state, setState] = useState('idle'); // idle, normal, overflow, mitigated

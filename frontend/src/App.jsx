@@ -7,7 +7,7 @@ import Scanner from './components/Scanner';
 import AIChatbot from './components/AIChatbot';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('tasks');
+  const [activeTab, setActiveTab] = useState('taskmgr');
   const [demoMode, setDemoMode] = useState(false);
   const [backendStatus, setBackendStatus] = useState('checking'); // checking, online, offline
 
