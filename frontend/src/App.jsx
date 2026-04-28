@@ -99,28 +99,45 @@ function App() {
 
       {/* Main Content Area */}
       <main className="flex-1 overflow-y-auto bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-blue-900/10 via-slate-950 to-slate-950 p-10">
-        {/* Header */}
-        <header className="flex justify-between items-center mb-8 bg-slate-900/40 p-6 rounded-3xl border border-blue-500/10 backdrop-blur-xl relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-64 h-full bg-blue-600/5 -skew-x-12 translate-x-32 group-hover:translate-x-20 transition-transform duration-1000"></div>
-          <div>
-            <h1 className="text-2xl font-black tracking-tighter uppercase flex items-center">
+        <header className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 bg-slate-900/40 p-8 rounded-[32px] border border-blue-500/10 backdrop-blur-2xl relative overflow-hidden group gap-6">
+          <div className="absolute top-0 right-0 w-96 h-full bg-blue-600/5 -skew-x-12 translate-x-48 group-hover:translate-x-32 transition-transform duration-1000"></div>
+          
+          <div className="relative z-10">
+            <div className="flex items-center space-x-3 mb-2">
+              <span className="w-2 h-2 bg-blue-500 rounded-full animate-ping"></span>
+              <span className="text-[10px] font-black text-blue-500 uppercase tracking-[0.4em]">Node_Alpha_Terminal</span>
+            </div>
+            <h1 className="text-3xl font-black tracking-tighter uppercase flex items-center text-white">
               {activeTab === 'taskmgr' ? 'Kernel Processes' : activeTab === 'scanner' ? 'Security Audit' : 'Security Sandbox'}
-              {demoMode && <span className="ml-3 px-2 py-0.5 bg-blue-600/20 text-blue-400 text-[8px] border border-blue-500/30 rounded-full animate-pulse">SIMULATION_MODE</span>}
+              {demoMode && <span className="ml-4 px-3 py-1 bg-blue-600/20 text-blue-400 text-[9px] border border-blue-500/30 rounded-full animate-pulse font-black tracking-widest">SIM_ACTIVE</span>}
             </h1>
-            <p className="text-blue-500/50 text-[10px] font-mono uppercase tracking-[0.3em] mt-1">Real-time system monitoring and defensive analysis</p>
+            <div className="flex items-center mt-2 space-x-4">
+              <p className="text-blue-500/40 text-[9px] font-mono uppercase tracking-[0.2em]">S_ID: {Math.random().toString(36).substring(7).toUpperCase()}</p>
+              <div className="h-1 w-1 bg-blue-900 rounded-full"></div>
+              <p className="text-blue-500/40 text-[9px] font-mono uppercase tracking-[0.2em]">Lat: 14ms</p>
+            </div>
           </div>
-          <div className="flex items-center space-x-4 relative z-10">
-            <div className="hidden md:flex space-x-3">
-              <div className="bg-slate-950/80 px-4 py-2 rounded-xl border border-blue-500/10 flex items-center">
-                <Cpu className="w-3.5 h-3.5 text-blue-500 mr-2" />
-                <span className="text-[10px] font-black uppercase text-blue-100">CPU: {demoMode ? '12.4%' : 'LIVE'}</span>
+
+          <div className="flex items-center space-x-4 relative z-10 w-full lg:w-auto">
+            <div className="flex-1 lg:flex-none grid grid-cols-2 md:flex md:space-x-4 gap-3">
+              <div className="bg-slate-950/80 px-5 py-3 rounded-2xl border border-blue-500/10 flex items-center group/item hover:border-blue-500/40 transition-all">
+                <Cpu className="w-4 h-4 text-blue-500 mr-3 animate-pulse" />
+                <div>
+                  <p className="text-[8px] font-black text-blue-500/50 uppercase tracking-widest">Load</p>
+                  <span className="text-[11px] font-black uppercase text-blue-50">{(Math.random() * 15 + 5).toFixed(1)}%</span>
+                </div>
               </div>
-              <div className="bg-slate-950/80 px-4 py-2 rounded-xl border border-blue-500/10 flex items-center">
-                <Shield className="w-3.5 h-3.5 text-blue-500 mr-2" />
-                <span className="text-[10px] font-black uppercase text-blue-100">FIREWALL: ON</span>
+              <div className="bg-slate-950/80 px-5 py-3 rounded-2xl border border-blue-500/10 flex items-center group/item hover:border-blue-500/40 transition-all">
+                <Shield className="w-4 h-4 text-blue-500 mr-3" />
+                <div>
+                  <p className="text-[8px] font-black text-blue-500/50 uppercase tracking-widest">Threat</p>
+                  <span className="text-[11px] font-black uppercase text-green-500">LOW</span>
+                </div>
               </div>
             </div>
-            <div className={`w-3 h-3 rounded-full ${backendStatus === 'online' ? 'bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.8)]' : 'bg-blue-900 animate-pulse'}`}></div>
+            <div className={`w-4 h-12 rounded-xl flex items-center justify-center ${backendStatus === 'online' ? 'bg-blue-600 shadow-[0_0_20px_rgba(37,99,235,0.4)]' : 'bg-slate-800 animate-pulse'}`}>
+              <Activity className="w-4 h-4 text-white" />
+            </div>
           </div>
         </header>
 
