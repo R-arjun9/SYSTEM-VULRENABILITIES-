@@ -24,12 +24,15 @@ const Scanner = ({ isDemo }) => {
   const logEndRef = useRef(null);
 
   const MOCK_RESULT = {
-    system_info: { os: 'Windows', release: '11 Pro', architecture: 'x64' },
-    health_score: 42,
+    system_info: { 
+      os: navigator.platform.includes('Win') ? 'Windows' : 'Unix/MacOS', 
+      release: 'Detected via Browser', 
+      architecture: navigator.userAgent.includes('x64') ? 'x64' : 'ARM/x86' 
+    },
+    health_score: 85,
     vulnerabilities: [
-      { type: 'AlwaysInstallElevated Enabled', severity: 'Critical', details: 'Registry misconfiguration allows standard users to install MSI files with SYSTEM rights.', mitigation: 'Disable AlwaysInstallElevated in Group Policy.' },
-      { type: 'Insecure DEP Policy', severity: 'High', details: 'Data Execution Prevention is not strictly enforced for all processes.', mitigation: 'Configure DEP to AlwaysOn/OptOut.' },
-      { type: 'Unauthorized Process Resident', severity: 'Medium', details: 'A process named payload.exe is executing from the user Temp directory.', mitigation: 'Terminate process and scan for persistence.' }
+      { type: 'Hardware Exposure', severity: 'Low', details: `Detected ${navigator.hardwareConcurrency} Logical CPU Cores available to the browser.`, mitigation: 'Generic hardware fingerprinting detected.' },
+      { type: 'Memory Profile', severity: 'Low', details: `Approx. ${navigator.deviceMemory || 'Unknown'} GB Device RAM exposed.`, mitigation: 'Browser privacy settings can limit this exposure.' }
     ]
   };
 

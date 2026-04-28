@@ -7,17 +7,28 @@ const TaskManager = ({ isDemo }) => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
 
+  const [battery, setBattery] = useState(null);
+
+  useEffect(() => {
+    if (navigator.getBattery) {
+      navigator.getBattery().then(batt => {
+        setBattery(Math.floor(batt.level * 100));
+        batt.addEventListener('levelchange', () => setBattery(Math.floor(batt.level * 100)));
+      });
+    }
+  }, []);
+
   const MOCK_DATA = {
-    cpu_usage: 24.5,
-    memory_usage: 45.2,
-    used_memory: 8589934592,
-    total_memory: 17179869184,
+    cpu_usage: navigator.hardwareConcurrency * 2.5,
+    memory_usage: battery || 45.2,
+    used_memory: (navigator.deviceMemory || 8) * 1024 * 1024 * 1024 * 0.4,
+    total_memory: (navigator.deviceMemory || 8) * 1024 * 1024 * 1024,
     processes: [
-      { name: 'system_explorer.exe', pid: 1420, cpu_percent: 1.2, memory_percent: 0.5 },
-      { name: 'security_watchdog.bin', pid: 2844, cpu_percent: 0.8, memory_percent: 0.2 },
-      { name: 'kernel_scheduler', pid: 4, cpu_percent: 4.5, memory_percent: 1.1 },
-      { name: 'browser_engine', pid: 8832, cpu_percent: 12.4, memory_percent: 3.4 },
-      { name: 'mal_payload_x64.msi', pid: 9912, cpu_percent: 25.2, memory_percent: 8.9 }
+      { name: 'browser_kernel.main', pid: 1420, cpu_percent: 1.2, memory_percent: 0.5 },
+      { name: `${navigator.platform}_system_host`, pid: 2844, cpu_percent: 0.8, memory_percent: 0.2 },
+      { name: 'hardware_concurrency_monitor', pid: 4, cpu_percent: 4.5, memory_percent: 1.1 },
+      { name: 'network_stack_analysis', pid: 8832, cpu_percent: 12.4, memory_percent: 3.4 },
+      { name: 'battery_manager_service', pid: 9912, cpu_percent: 2.2, memory_percent: 0.9 }
     ]
   };
 

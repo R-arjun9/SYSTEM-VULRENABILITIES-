@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { LayoutDashboard, ShieldAlert, BookOpen, Terminal, Activity, Cpu, ShieldCheck } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { LayoutDashboard, ShieldAlert, BookOpen, Terminal, Activity, Cpu, Shield, AlertTriangle } from 'lucide-react';
 
 import TaskManager from './components/TaskManager';
 import SecurityDemos from './components/SecurityDemos';
