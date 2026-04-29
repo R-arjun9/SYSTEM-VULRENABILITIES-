@@ -175,25 +175,13 @@ function App() {
                 >
                   Enter Simulation Mode
                 </button>
-                <a 
-                  href="https://github.com/R-arjun9/SYSTEM-VULRENABILITIES-/tree/main/agent"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-10 py-4 bg-blue-900/30 hover:bg-blue-900/50 text-blue-400 rounded-2xl font-black tracking-tighter uppercase transition-all border border-blue-500/20 active:scale-95 flex items-center justify-center"
-                >
-                  Download Agent
-                </a>
               </div>
               <div className="mt-12 p-6 bg-slate-950/80 rounded-2xl border border-blue-500/5 max-w-lg w-full">
-                <p className="text-[10px] text-blue-500 font-black uppercase mb-3 tracking-widest">How to fix this:</p>
+                <p className="text-[10px] text-blue-500 font-black uppercase mb-3 tracking-widest">How to start your project:</p>
                 <div className="font-mono text-[11px] text-blue-300/70 space-y-1">
-                  <p>1. Click <span className="text-blue-400">Download Agent</span> and unzip the files.</p>
-                  <p>2. <span className="text-blue-400">Windows:</span> Run <span className="text-blue-400">run.bat</span></p>
-                  <p>3. <span className="text-blue-400">Mac/Linux:</span> Run <span className="text-blue-400">sh run.sh</span> in terminal.</p>
-                  <p>4. This UI will automatically sync with your laptop.</p>
-                  <p className="pt-4 text-red-400 font-black tracking-widest uppercase">⚠️ Browser Security Alert:</p>
-                  <p>If using the Live Link, Chrome may block "Insecure Content" (Localhost).</p>
-                  <p>Go to <span className="text-blue-400">Site Settings</span> and set <span className="text-blue-400">Insecure Content</span> to <span className="text-blue-400">Allow</span>.</p>
+                  <p>1. Open your project folder.</p>
+                  <p>2. Double-click <span className="text-blue-400">run.bat</span></p>
+                  <p>3. Wait for the browser to open automatically.</p>
                 </div>
               </div>
             </div>
