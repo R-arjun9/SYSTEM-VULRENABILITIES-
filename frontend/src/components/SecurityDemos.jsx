@@ -96,7 +96,7 @@ const BufferOverflowDemo = () => {
 
         {/* Status Message */}
         <div className="mt-10 h-20 flex items-center justify-center text-center px-6">
-          {state === 'normal' && <div className="animate-fade-in-up text-blue-400 font-bold uppercase tracking-widest text-xs flex items-center"><ShieldCheck className="w-5 h-5 mr-3" /> Integrity Check Passed :: No Violation</div>}
+          {state === 'normal' && <div className="animate-fade-in-up text-blue-400 font-bold uppercase tracking-widest text-xs flex items-center"><Shield className="w-5 h-5 mr-3 text-green-500" /> Integrity Check Passed :: No Violation</div>}
           {state === 'overflow' && <div className="animate-fade-in-up flex flex-col items-center">
             <p className="text-blue-400 font-black text-sm uppercase tracking-[0.2em] mb-2 flex items-center"><AlertTriangle className="w-5 h-5 mr-3 animate-pulse" /> KERNEL_PANIC: RETURN_ADDRESS_OVERWRITTEN</p>
             <p className="text-[10px] text-blue-500/60 font-mono max-w-sm">Attacker has synchronized with execution flow. Memory boundaries compromised.</p>

@@ -12,6 +12,7 @@ function App() {
   const [backendStatus, setBackendStatus] = useState('checking'); // checking, online, offline
 
   useEffect(() => {
+    window.backendPort = 8080; // Default fallback
     const checkConnection = async () => {
       const ports = [8080, 8081];
       let connected = false;

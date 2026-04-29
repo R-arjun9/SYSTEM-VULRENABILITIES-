@@ -33,16 +33,16 @@ public class SecurityServer {
     static class ScanHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
-            System.out.println("DEBUG: Received Scan Request from " + t.getRemoteAddress());
             t.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
-            t.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, OPTIONS");
-            t.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
+            t.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, OPTIONS, POST");
+            t.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type, Authorization");
             
             if ("OPTIONS".equals(t.getRequestMethod())) {
                 t.sendResponseHeaders(204, -1);
                 return;
             }
-
+            
+            System.out.println("DEBUG: Received Scan Request from " + t.getRemoteAddress());
             StringBuilder output = new StringBuilder();
             try {
                 // Try 'python' first, then 'python3'
@@ -95,16 +95,16 @@ public class SecurityServer {
     static class TaskMgrHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
-            System.out.println("DEBUG: Received TaskMgr Request from " + t.getRemoteAddress());
             t.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
-            t.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, OPTIONS");
-            t.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
+            t.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, OPTIONS, POST");
+            t.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type, Authorization");
             
             if ("OPTIONS".equals(t.getRequestMethod())) {
                 t.sendResponseHeaders(204, -1);
                 return;
             }
-
+            
+            System.out.println("DEBUG: Received TaskMgr Request from " + t.getRemoteAddress());
             StringBuilder output = new StringBuilder();
             try {
                 Process process;
