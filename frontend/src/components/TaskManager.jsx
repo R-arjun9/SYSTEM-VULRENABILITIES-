@@ -39,7 +39,8 @@ const TaskManager = ({ isDemo }) => {
       return;
     }
     try {
-      const response = await fetch('http://localhost:8080/api/taskmgr');
+      const port = window.backendPort || 8080;
+      const response = await fetch(`http://localhost:${port}/api/taskmgr`);
       const data = await response.json();
       if (!response.ok) {
         throw new Error(data.error || 'Backend failed to execute command');

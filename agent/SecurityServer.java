@@ -12,12 +12,20 @@ public class SecurityServer {
 
     public static void main(String[] args) throws Exception {
         int port = 8080;
-        HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
+        HttpServer server = null;
+        
+        try {
+            server = HttpServer.create(new InetSocketAddress(port), 0);
+        } catch (java.net.BindException e) {
+            System.out.println("Port 8080 is busy, trying fallback port 8081...");
+            port = 8081;
+            server = HttpServer.create(new InetSocketAddress(port), 0);
+        }
         
         server.createContext("/api/scan", new ScanHandler());
         server.createContext("/api/taskmgr", new TaskMgrHandler());
         
-        server.setExecutor(null); // creates a default executor
+        server.setExecutor(null); 
         System.out.println("Starting Java SecurityServer on port " + port);
         server.start();
     }

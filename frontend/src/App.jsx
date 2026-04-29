@@ -13,15 +13,25 @@ function App() {
 
   useEffect(() => {
     const checkConnection = async () => {
-      try {
-        const res = await fetch('http://localhost:8080/api/taskmgr');
-        if (res.ok) {
-          setBackendStatus('online');
-          setDemoMode(false);
-        } else {
-          setBackendStatus('offline');
+      const ports = [8080, 8081];
+      let connected = false;
+
+      for (const port of ports) {
+        try {
+          const res = await fetch(`http://localhost:${port}/api/taskmgr`);
+          if (res.ok) {
+            setBackendStatus('online');
+            setDemoMode(false);
+            window.backendPort = port; // Store globally for other components
+            connected = true;
+            break;
+          }
+        } catch (err) {
+          // Continue to next port
         }
-      } catch (err) {
+      }
+
+      if (!connected) {
         setBackendStatus('offline');
       }
     };
@@ -178,8 +188,9 @@ function App() {
                 <p className="text-[10px] text-blue-500 font-black uppercase mb-3 tracking-widest">How to fix this:</p>
                 <div className="font-mono text-[11px] text-blue-300/70 space-y-1">
                   <p>1. Click <span className="text-blue-400">Download Agent</span> and unzip the files.</p>
-                  <p>2. Right-click <span className="text-blue-400">run.bat</span> and select "Run as Administrator".</p>
-                  <p>3. This UI will automatically sync with your laptop.</p>
+                  <p>2. <span className="text-blue-400">Windows:</span> Run <span className="text-blue-400">run.bat</span></p>
+                  <p>3. <span className="text-blue-400">Mac/Linux:</span> Run <span className="text-blue-400">sh run.sh</span> in terminal.</p>
+                  <p>4. This UI will automatically sync with your laptop.</p>
                   <p className="pt-4 text-red-400 font-black tracking-widest uppercase">⚠️ Browser Security Alert:</p>
                   <p>If using the Live Link, Chrome may block "Insecure Content" (Localhost).</p>
                   <p>Go to <span className="text-blue-400">Site Settings</span> and set <span className="text-blue-400">Insecure Content</span> to <span className="text-blue-400">Allow</span>.</p>

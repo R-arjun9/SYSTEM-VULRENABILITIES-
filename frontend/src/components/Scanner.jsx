@@ -82,7 +82,8 @@ const Scanner = ({ isDemo }) => {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/api/scan');
+      const port = window.backendPort || 8080;
+      const response = await fetch(`http://localhost:${port}/api/scan`);
       const data = await response.json();
       if (!response.ok) {
         throw new Error(data.error || 'Audit engine failed');
